@@ -1,0 +1,117 @@
+\documentclass[a4paper,english,numbers=noenddot,bibtotoc,BCOR=1.5cm,headsepline,DIV=12,appendixprefix,final,openany]{scrbook}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bibgerm}
+\usepackage{url}
+\usepackage{svg}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tabularray}
+\usepackage{color}
+\usepackage{acronym}
+
+\graphicspath{ {./images/} }
+
+\setlength{\parindent}{0em} 
+
+\begin{document}
+
+\frontmatter
+\subject{{\LARGE Diploma Thesis}}
+\title{Investigations of Multichannel Fourier Transformation Methods for Fourier-based Imaging}
+\author{Pascal Stöver}
+\date{18. November 2024}
+\publishers{Technische Universität Dresden\\
+Faculty of Computer Science\\
+Vodafone Chair for Mobile Communications Systems
+\begin{minipage}{\textwidth}%\\
+    \vskip 6cm
+     {\normalsize }\begin{tabular}{ll}
+        Supervising professors: & Prof. Dr.-Ing. Dr. h.c. Gerhard Fettweis\\
+        & Prof. Dr.-Ing. Diana Goehringer\\
+        Supervisors: & M. Sc. Cornelius Kühnöl\\ 
+        & M. Sc. Edgar Dorausch
+    \end{tabular} {\normalsize }\end{minipage}}
+
+\maketitle
+
+\tableofcontents
+
+\addchap{Glossar}
+\begin{acronym}[dipl]
+    \acro{adc}[ADC]{analog digital converter}
+    \acro{cpu}[CPU]{central processing unit}
+    \acro{dac}[DAC]{digital analog converter}
+    \acro{dft}[DFT]{Discrete Fourier Transform}
+    \acro{fbi}[FBI]{Fourier based imaging}
+    \acro{fft}[FFT]{Fast Fourier Transform}
+    \acro{fpga}[FPGA]{field programmable gate array}
+    \acro{gpu}[GPU]{graphic processing unit}
+    \acro{noc}[NoC]{network on chip}
+    \acro{pl}[PL]{programmable logic}
+    \acro{risc}[RISC]{reduced instruction set computer}
+    \acro{soc}[SoC]{system on chip}
+\end{acronym}
+
+\newpage
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\chapter*{Statement of Authorship}
+    \begin{center}
+        \vspace*{\fill}
+            \begin{flushleft}
+                I hereby certify that I have authored this diploma thesis entitled \textit{Investigations of Multichannel Fourier Transformation Methods for Fourier-based Imaging} independently and without undue assistance from third parties. No other than the resources and references indicated in this thesis have been used. I have marked both literal and accordingly adopted quotations as such. There were no additional persons involved in the intellectual preparation of the present thesis. I am aware that violations of this declaration may lead to subsequent withdrawal of the degree.\\[1cm]
+                \begin{minipage}{0.5\textwidth}
+                    Dresden, 18th November 2024
+                \end{minipage}
+                \hfill
+                \begin{minipage}{0.4\textwidth}
+                    \rule[-1.8ex]{5cm}{0.4pt}
+                \end{minipage}
+            \end{flushleft}
+        \vspace*{\fill}
+\end{center}
+
+\newpage
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\chapter*{Abstract}
+\begin{center}
+    \vspace*{\fill}
+        \begin{flushleft}
+            In this thesis, the acceleration of the Fast Fourier Transform (FFT) on a system-on-chip (SoC) is investigated in the context of medical ultrasound image reconstruction, which requires real-time processing of large datasets. The Versal VCK190 SoC by Xilinx, featuring specialized AI Engines—highly parallel small RISC processors—was selected for this study. The Cooley-Tukey algorithm is employed to leverage these engines for efficient parallel processing of the FFT.\par
+            The thesis demonstrate that the real-time performance of the FFT is primarily constrained by data streaming between the AI Engines, rather than the computation itself. While the AI Engine-based FFT calculations account for approximately 20\% of the overall runtime and meet real-time requirements, the data streaming exceeds these constraints, posing a significant bottleneck. This underscores the need for further optimization in managing large-scale data streaming within the SoC to fully exploit its real-time capabilities.\par
+            Additionally, this work highlights the potential of leveraging AI accelerators in SoC platforms to achieve computationally intensive tasks within constrained environments. Beyond ultrasound imaging, the advancements presented in this thesis have broader implications for applications that rely on efficient frequency-domain processing, such as radar imaging and mobile communications. By addressing both the technical challenges and the hardware constraints, this work provides valuable insights and opens new pathways for real-time imaging technology across multiple domains.
+
+        \end{flushleft}
+    \vspace*{\fill}
+\end{center}
+
+\mainmatter
+\input{introduction.tex}
+\input{state.tex}
+\input{design.tex}
+\input{implementation.tex}
+\input{evaluation.tex}
+\input{conclusion.tex}
+
+%\appendix
+
+\listoffigures
+\listoftables
+
+
+
+%\begin{description}
+%\end{description}
+
+\bibliographystyle{acm}
+\bibliography{own}
+
+\end{document}
+
